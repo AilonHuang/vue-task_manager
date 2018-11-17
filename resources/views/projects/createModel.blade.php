@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createProjectModel">
-    <i class="fas fa-plus"></i>
+    <i class="fa fa-plus"></i>
 </button>
 
 <!-- Modal -->
