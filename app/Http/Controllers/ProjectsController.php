@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
 {
-    public function store() {
-        return 'hi';
+    public function store(Request $request) {
+        $request->user()->projects()->create([
+            'name' => $request->name,
+            'thumbnail' => $request->thumbnail
+        ]);
     }
 }
