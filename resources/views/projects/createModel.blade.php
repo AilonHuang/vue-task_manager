@@ -14,7 +14,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            {!! Form::open() !!}
+            {!! Form::open(['route' => 'projects.store', 'method' => 'POST']) !!}
             <div class="modal-body">
 
                 <div class="form-group">
