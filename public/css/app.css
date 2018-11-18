@@ -13546,6 +13546,13 @@ a {
   margin-right: .7em;
 }
 
+.card .icon-bar li .btn {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
 .card .icon-bar li .fa-btn {
   color: #d9534f;
 }
