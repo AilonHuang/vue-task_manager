@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Image;
 use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
 {
     public function store(Request $request)
     {
-
-
         $request->user()->projects()->create([
             'name' => $request->name,
             'thumbnail' => $this->thumb($request)
@@ -18,10 +17,15 @@ class ProjectsController extends Controller
 
     public function thumb($request)
     {
-        $path = null;
         if ($request->hasFile('thumbnail')) {
-            $path = $request->thumbnail->store('public/thumbs');
+            $thumb = $request->thumbnail;
+            $name = $thumb->hashName();
+            // 保存图片
+            $request->thumbnail->storeAs('public/thumbs/original', $name);
+            $path = storage_path('app/public/thumbs/cropped/' . $name);
+            // 处理图片
+            Image::make($thumb)->resize(200, 90)->save($path);
+            return $name;
         }
-        return $path;
     }
 }
