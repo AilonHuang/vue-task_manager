@@ -31,7 +31,7 @@ class CreateProjectRequest extends FormRequest
                     return $query->where('user_id', request()->user()->id);
                 })
             ],
-            'thumbnail' => 'image|dimensions:min_width=260,min_height=100'
+            'thumbnail' => 'image|dimensions:min_width=260,min_height=90'
         ];
     }
 

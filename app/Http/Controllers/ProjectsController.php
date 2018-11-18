@@ -17,5 +17,6 @@ class ProjectsController extends Controller
     public function store(CreateProjectRequest $request)
     {
         $this->repository->create($request);
+        return back();
     }
 }
