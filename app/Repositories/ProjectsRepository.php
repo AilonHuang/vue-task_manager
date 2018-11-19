@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Project;
 use Image;
 
 class ProjectsRepository
@@ -25,5 +26,26 @@ class ProjectsRepository
             Image::make($thumb)->resize(200, 90)->save($path);
             return $name;
         }
+    }
+
+    public function find($id)
+    {
+        return Project::findOrFail($id);
+    }
+
+    public function delete($id)
+    {
+        $project = $this->find($id);
+        $project->delete();
+    }
+
+    public function update($request, $id)
+    {
+        $project = $this->find($id);
+        $project->name = $request->name;
+        if ($request->hasFile('thumbnail')) {
+            $project->thumbnail = $this->thumb($request);
+        }
+        $project->save();
     }
 }
