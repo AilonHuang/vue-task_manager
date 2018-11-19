@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -44,5 +45,12 @@ class UpdateProjectRequest extends FormRequest
             'thumbnail.dimensions' => '图片的最小尺寸是260X100像素',
             'thumbnail.max' => '图片的大小不能超过2M',
         ];
+    }
+
+
+    protected function failedValidation(Validator $validator)
+    {
+        $this->errorBag = 'update-' . $this->route('project');
+        parent::failedValidation($validator);
     }
 }

@@ -15,12 +15,20 @@
                 <div class="form-group">
                     {!! Form::label('name', '项目名称：') !!}
                     {!! Form::text('name', null, ['class' => 'form-control']) !!}
+{{--                    {!! $errors->getBag('update-' . $project->id)->first('name', '<div class="alert alert-danger">:message</div>') !!}--}}
                 </div>
                 <div class="form-group">
                     {!! Form::label('thumbnail', '项目缩略图：') !!}
                     {!! Form::file('thumbnail', ['class' => 'form-control-file']) !!}
                 </div>
-                @include('errors._errors')
+                {{--@include('errors._errors')--}}
+                @if($errors->getBag('update-' . $project->id)->any())
+                    <ul class="alert alert-danger">
+                        @foreach($errors->getBag('update-' . $project->id)->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                @endif
             </div>
             <div class="modal-footer">
                 {!! Form::submit('编辑项目', ['class' => 'btn btn-primary']) !!}
