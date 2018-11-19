@@ -7,6 +7,10 @@ use Image;
 
 class ProjectsRepository
 {
+    public function list()
+    {
+        return request()->user()->projects()->get();
+    }
     public function create($request) {
         $request->user()->projects()->create([
             'name' => $request->name,

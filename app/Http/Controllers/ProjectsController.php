@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Repositories\ProjectsRepository;
-use Image;
 
 class ProjectsController extends Controller
 {
@@ -14,6 +13,14 @@ class ProjectsController extends Controller
     public function __construct(ProjectsRepository $repository)
     {
         $this->repository = $repository;
+        $this->middleware('auth');
+    }
+
+
+    public function index()
+    {
+        $projects = $this->repository->list();
+        return view('welcome', compact('projects'));
     }
 
     public function store(CreateProjectRequest $request)
@@ -22,15 +29,21 @@ class ProjectsController extends Controller
         return back();
     }
 
-    public function destroy($id)
+    public function show($id)
     {
-        $this->repository->delete($id);
-        return back();
+        $project = $this->repository->find($id);
+        return view('projects.show', compact('project'));
     }
 
     public function update(UpdateProjectRequest $request, $id)
     {
         $this->repository->update($request, $id);
+        return back();
+    }
+
+    public function destroy($id)
+    {
+        $this->repository->delete($id);
         return back();
     }
 }

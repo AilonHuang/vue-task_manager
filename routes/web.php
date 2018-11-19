@@ -11,11 +11,9 @@
 |
 */
 
-Route::get('/', 'HomeController@root');
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/projects', 'ProjectsController@store')->name('projects.store');
-Route::delete('/projects/{project}', 'ProjectsController@destroy')->name('projects.destroy');
-Route::patch('/projects/{project}', 'ProjectsController@update')->name('projects.update');
+
+Route::resource('projects', 'ProjectsController');
+Route::resource('tasks', 'TasksController');
