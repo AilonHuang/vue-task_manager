@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Repositories\ProjectsRepository;
-use Illuminate\Http\Request;
 use Image;
 
 class ProjectsController extends Controller
@@ -28,7 +28,7 @@ class ProjectsController extends Controller
         return back();
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateProjectRequest $request, $id)
     {
         $this->repository->update($request, $id);
         return back();
