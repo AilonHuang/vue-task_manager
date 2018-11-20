@@ -15,6 +15,7 @@
                 @foreach($todos as $task)
                     <tr>
                         <td>{{$task->name}}</td>
+                        <td>@include('tasks._checkForm')</td>
                     </tr>
                 @endforeach
             </table>
@@ -23,7 +24,7 @@
     <div class="tab-pane fade" id="done" role="tabpanel" aria-labelledby="done-tab">
         @if(count($dones))
             <table class="table table-striped">
-                @foreach($todos as $task)
+                @foreach($dones as $task)
                     <tr>
                         <td>{{$task->name}}</td>
                     </tr>
