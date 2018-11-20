@@ -52,4 +52,14 @@ class ProjectsRepository
         }
         $project->save();
     }
+
+    public function todos($project)
+    {
+        return $project->tasks()->where('completion', 0)->get();
+    }
+
+    public function dones($project)
+    {
+        return $project->tasks()->where('completion', 1)->get();
+    }
 }
