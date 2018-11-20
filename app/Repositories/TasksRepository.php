@@ -36,4 +36,10 @@ class TasksRepository
             'project_id' => $request->project
         ]);
     }
+
+    public function destroy($id)
+    {
+        $task = $this->find($id);
+        $task->delete($id);
+    }
 }
