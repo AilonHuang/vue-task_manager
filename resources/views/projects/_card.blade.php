@@ -11,7 +11,7 @@
                 </button>
             </li>
         </ul>
-        <a href="projects/{{$project->id}}">
+        <a href="{{route('projects.show', $project->id)}}">
             <img class="card-img-top" src="{{asset('storage/thumbs/cropped/' . $project->thumbnail)}}"
                  alt="Card image cap">
             <div class="card-body py-3">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Project;
 use App\Repositories\ProjectsRepository;
 
 class ProjectsController extends Controller
@@ -29,9 +30,9 @@ class ProjectsController extends Controller
         return back();
     }
 
-    public function show($id)
+    public function show(Project $project)
     {
-        $project = $this->repository->find($id);
+//        $project = $this->repository->find($id);
         return view('projects.show', compact('project'));
     }
 
