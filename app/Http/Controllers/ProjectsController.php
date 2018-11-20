@@ -35,7 +35,8 @@ class ProjectsController extends Controller
 //        $project = $this->repository->find($id);
         $todos = $this->repository->todos($project);
         $dones = $this->repository->dones($project);
-        return view('projects.show', compact('project', 'todos', 'dones'));
+        $projects = request()->user()->projects()->pluck('name', 'id');
+        return view('projects.show', compact('project', 'todos', 'dones', 'projects'));
     }
 
     public function update(UpdateProjectRequest $request, $id)

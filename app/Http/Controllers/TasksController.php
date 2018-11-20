@@ -82,7 +82,8 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->repository->update($request, $id);
+        return back();
     }
 
     /**
