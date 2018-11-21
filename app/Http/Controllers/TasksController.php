@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTask;
+use App\Http\Requests\UpdateTask;
 use App\Repositories\TasksRepository;
-use Illuminate\Http\Request;
 
 class TasksController extends Controller
 {
@@ -81,7 +81,7 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTask $request, $id)
     {
         $this->repository->update($request, $id);
         return back();

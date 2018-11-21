@@ -2,13 +2,12 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CreateTask extends FormRequest
+class UpdateTask extends FormRequest
 {
-    protected $errorBag = 'create';
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,7 +27,9 @@ class CreateTask extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'project' => ['required', 'integer', Rule::exists('projects', 'id')->whereIn('id', request()->user()->projects()->pluck('id')->toArray())]
+            'project' => ['required', 'integer', Rule::exists('projects', 'id')->where(function ($query) {
+                $query->whereIn('id', request()->user()->projects()->pluck('id'));
+            })]
         ];
     }
 
@@ -39,7 +40,13 @@ class CreateTask extends FormRequest
             'name.max' => '任务名称的长度超出的最大字符限制：255',
             'project.required' => '没有提交当前任务所属项目的id',
             'project.integer' => '所提交的项目id无效（非整数）',
-            'project.exists' => '所提交的项目id无效（不存在）',
+            'project.exists' => '所提交的项目id无效（当前用户无此项目）',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        $this->errorBag = 'update-' . $this->route('task');
+        parent::failedValidation($validator);
     }
 }
