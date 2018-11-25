@@ -46,10 +46,10 @@ class TasksRepository
 
     public function todos()
     {
-        return auth()->user()->tasks()->where('completion', 0)->paginate(5);
+        return auth()->user()->tasks()->where('completion', 0)->paginate(15);
     }
     public function dones()
     {
-        return auth()->user()->tasks()->where('completion', 1)->paginate(5);
+        return auth()->user()->tasks()->where('completion', 1)->paginate(15);
     }
 }
