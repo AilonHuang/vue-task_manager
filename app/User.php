@@ -33,4 +33,9 @@ class User extends Authenticatable
         // $user->projects
         return $this->hasMany(Project::class);
     }
+
+    public function tasks()
+    {
+        return $this->hasManyThrough(Task::class, Project::class);
+    }
 }

@@ -13,7 +13,7 @@
 
         <table class="table table-striped">
             <tr>
-                @include('tasks._createForm')
+                <td colspan="4">@include('tasks._createForm')</td>
             </tr>
             @if(count($todos))
                 @foreach($todos as $task)

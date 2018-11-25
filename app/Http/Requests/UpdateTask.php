@@ -27,7 +27,7 @@ class UpdateTask extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'project' => ['required', 'integer', Rule::exists('projects', 'id')->where(function ($query) {
+            'project_id' => ['required', 'integer', Rule::exists('projects', 'id')->where(function ($query) {
                 $query->whereIn('id', request()->user()->projects()->pluck('id'));
             })]
         ];
@@ -38,9 +38,9 @@ class UpdateTask extends FormRequest
         return [
             'name.required' => '任务名称是必须的',
             'name.max' => '任务名称的长度超出的最大字符限制：255',
-            'project.required' => '没有提交当前任务所属项目的id',
-            'project.integer' => '所提交的项目id无效（非整数）',
-            'project.exists' => '所提交的项目id无效（当前用户无此项目）',
+            'project_id.required' => '没有提交当前任务所属项目的id',
+            'project_id.integer' => '所提交的项目id无效（非整数）',
+            'project_id.exists' => '所提交的项目id无效（当前用户无此项目）',
         ];
     }
 
