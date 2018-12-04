@@ -18,7 +18,10 @@
             @if(count($todos))
                 @foreach($todos as $task)
                     <tr>
-                        <td class="col-9 pl-5">{{$task->name}}</td>
+                        <td class="col-9">
+                            <span class="badge badge-secondary mr-3">{{$task->updated_at->diffForHumans()}}</span>
+                            {{$task->name}}
+                        </td>
                         <td>@include('tasks._checkForm')</td>
                         <td>@include('tasks._editModal')</td>
                         <td>@include('tasks._deleteForm')</td>
