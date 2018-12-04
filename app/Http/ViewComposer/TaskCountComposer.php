@@ -2,16 +2,23 @@
 
 namespace App\Http\ViewComposer;
 
+use App\Repositories\TasksRepository;
 use Illuminate\View\View;
 
 class TaskCountComposer
 {
+    protected $repository;
+    public function __construct(TasksRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function compose(View $view)
     {
         return $view->with([
-            'total' => 30,
-            'todoCount' => 20,
-            'doneCount' => 20
+            'total' => $this->repository->totalCount(),
+            'todoCount' => $this->repository->todoCount(),
+            'doneCount' => $this->repository->doneCount()
         ]);
     }
 }
