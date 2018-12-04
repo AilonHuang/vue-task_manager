@@ -15,6 +15,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Carbon::setLocale('zh');
+        view()->composer('layouts.app', function ($view) {
+            $view->with([
+                'total' => 30,
+                'todoCount' => 10,
+                'doneCount' => 20,
+            ]);
+        });
     }
 
     /**
