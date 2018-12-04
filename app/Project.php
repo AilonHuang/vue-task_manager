@@ -20,4 +20,9 @@ class Project extends Model
     {
         return $this->hasMany(Task::class);
     }
+
+    public function getThumbnailAttribute($vaule)
+    {
+        return $value ?? 'default.jpeg';
+    }
 }
