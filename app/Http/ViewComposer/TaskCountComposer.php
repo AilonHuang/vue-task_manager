@@ -15,10 +15,12 @@ class TaskCountComposer
 
     public function compose(View $view)
     {
-        return $view->with([
-            'total' => $this->repository->totalCount(),
-            'todoCount' => $this->repository->todoCount(),
-            'doneCount' => $this->repository->doneCount()
-        ]);
+        if (auth()->user()) {
+            return $view->with([
+                'total' => $this->repository->totalCount(),
+                'todoCount' => $this->repository->todoCount(),
+                'doneCount' => $this->repository->doneCount()
+            ]);
+        }
     }
 }
