@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateTask;
 use App\Http\Requests\UpdateTask;
 use App\Repositories\TasksRepository;
+use App\Task;
 
 class TasksController extends Controller
 {
@@ -58,9 +59,9 @@ class TasksController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Task $task)
     {
-        //
+        return view('tasks.show', compact('task'));
     }
 
     public function check($id)
