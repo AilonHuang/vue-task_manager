@@ -18,5 +18,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'ProjectsController@index');
 Route::resource('projects', 'ProjectsController');
 Route::resource('tasks', 'TasksController');
+Route::resource('tasks.steps', 'stepController');
 Route::post('tasks/{id}/check', 'TasksController@check')->name('tasks.check');
 Route::delete('tasks/{id}/destroy', 'TasksController@destroy')->name('tasks.destroy');
