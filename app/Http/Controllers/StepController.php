@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Step;
+use App\Task;
 use Illuminate\Http\Request;
 
 class StepController extends Controller
@@ -12,9 +13,9 @@ class StepController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Task $task)
     {
-        //
+        return $task->steps;
     }
 
     /**
