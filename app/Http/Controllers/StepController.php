@@ -39,7 +39,7 @@ class StepController extends Controller
     public function store(Task $task, Request $request)
     {
         return response()->json([
-            'step' => $task->steps()->create($request->only('name'))
+            'step' => $task->steps()->create($request->only('name'))->refresh()
         ], 201);
     }
 
