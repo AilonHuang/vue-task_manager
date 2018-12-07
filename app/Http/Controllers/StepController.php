@@ -33,7 +33,7 @@ class StepController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Task $task, Request $request)
@@ -46,7 +46,7 @@ class StepController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Step  $step
+     * @param  \App\Step $step
      * @return \Illuminate\Http\Response
      */
     public function show(Step $step)
@@ -57,7 +57,7 @@ class StepController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Step  $step
+     * @param  \App\Step $step
      * @return \Illuminate\Http\Response
      */
     public function edit(Step $step)
@@ -68,19 +68,19 @@ class StepController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Step  $step
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Step $step
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Step $step)
+    public function update(Request $request, Task $task, Step $step)
     {
-        //
+        $step->update($request->only('completion'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Step  $step
+     * @param  \App\Step $step
      * @return \Illuminate\Http\Response
      */
     public function destroy(Task $task, Step $step)

@@ -103,23 +103,29 @@
         // this.newStep = ''
       },
       toggle (step) {
-        step.completion = !step.completion
+        axios.patch(`${this.route}/${step.id}`, {completion: !step.completion}).then((res) => {
+          step.completion = !step.completion
+        }).catch((err) => {
+
+        })
       },
-      remove (step) {
+      remove (step, success) {
         axios.delete(`${this.route}/${step.id}`).then((res) => {
           let i = this.steps.indexOf(step)
           this.steps.splice(i, 1)
+          success && success()
         }).catch((err) => {
 
         })
       },
       edit (step) {
         // 删除当前step
-        this.remove(step)
-        // 在输入框显示当前step的name
-        this.newStep = step.name
-        // focus 当前输入框
-        this.$refs.newStep.focus()
+        this.remove(step, () => {
+          // 在输入框显示当前step的name
+          this.newStep = step.name
+          // focus 当前输入框
+          this.$refs.newStep.focus()
+        })
       },
       completeAll () {
         this.inProcess.forEach((step) => {

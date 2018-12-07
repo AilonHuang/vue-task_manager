@@ -47270,7 +47270,7 @@ exports = module.exports = __webpack_require__(42)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47838,23 +47838,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       // this.newStep = ''
     },
     toggle: function toggle(step) {
-      step.completion = !step.completion;
+      axios.patch(this.route + '/' + step.id, { completion: !step.completion }).then(function (res) {
+        step.completion = !step.completion;
+      }).catch(function (err) {});
     },
-    remove: function remove(step) {
+    remove: function remove(step, success) {
       var _this3 = this;
 
       axios.delete(this.route + '/' + step.id).then(function (res) {
         var i = _this3.steps.indexOf(step);
         _this3.steps.splice(i, 1);
+        success && success();
       }).catch(function (err) {});
     },
     edit: function edit(step) {
+      var _this4 = this;
+
       // 删除当前step
-      this.remove(step);
-      // 在输入框显示当前step的name
-      this.newStep = step.name;
-      // focus 当前输入框
-      this.$refs.newStep.focus();
+      this.remove(step, function () {
+        // 在输入框显示当前step的name
+        _this4.newStep = step.name;
+        // focus 当前输入框
+        _this4.$refs.newStep.focus();
+      });
     },
     completeAll: function completeAll() {
       this.inProcess.forEach(function (step) {
