@@ -47270,7 +47270,7 @@ exports = module.exports = __webpack_require__(42)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47823,13 +47823,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     fetchSteps: function fetchSteps() {
       var _this = this;
 
-      axios.get(this.route + '/123').then(function (res) {
+      axios.get(this.route).then(function (res) {
         _this.steps = res.data.steps;
       }).catch(function (err) {});
     },
     addStep: function addStep() {
-      this.steps.push({ name: this.newStep, completion: false });
-      this.newStep = '';
+      var _this2 = this;
+
+      axios.post(this.route, { name: this.newStep }).then(function (res) {
+        _this2.steps.push(res.data.step);
+        _this2.newStep = '';
+      }).catch(function (err) {});
+      // this.steps.push({name: this.newStep, completion: false})
+      // this.newStep = ''
     },
     toggle: function toggle(step) {
       step.completion = !step.completion;

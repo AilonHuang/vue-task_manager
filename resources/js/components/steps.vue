@@ -85,15 +85,22 @@
     },
     methods: {
       fetchSteps () {
-        axios.get(this.route + '/123').then((res) => {
+        axios.get(this.route).then((res) => {
           this.steps = res.data.steps
         }).catch((err) => {
 
         })
       },
       addStep () {
-        this.steps.push({name: this.newStep, completion: false})
-        this.newStep = ''
+        axios.post(this.route, {name: this.newStep}).then((res) => {
+          this.steps.push(res.data.step)
+          this.newStep = ''
+
+        }).catch((err) => {
+
+        })
+        // this.steps.push({name: this.newStep, completion: false})
+        // this.newStep = ''
       },
       toggle (step) {
         step.completion = !step.completion
