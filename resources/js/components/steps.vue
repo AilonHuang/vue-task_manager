@@ -135,10 +135,13 @@
         }).catch((err) => {
 
         })
-
       },
       clearCompleted () {
-        this.steps = this.inProcess
+        axios.delete(`${this.route}/clear`).then((res) => {
+          this.steps = this.inProcess
+        }).catch((err) => {
+
+        })
       }
     }
   }

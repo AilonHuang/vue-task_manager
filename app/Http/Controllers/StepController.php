@@ -94,4 +94,9 @@ class StepController extends Controller
     {
         $step->delete();
     }
+
+    public function clear(Task $task)
+    {
+        $task->steps()->where('completion', '=', 1)->delete();
+    }
 }
