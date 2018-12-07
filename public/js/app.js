@@ -47270,7 +47270,7 @@ exports = module.exports = __webpack_require__(42)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47841,14 +47841,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       step.completion = !step.completion;
     },
     remove: function remove(step) {
-      var i = this.steps.indexOf(step);
-      this.steps.splice(i, 1);
+      var _this3 = this;
+
+      axios.delete(this.route + '/' + step.id).then(function (res) {
+        var i = _this3.steps.indexOf(step);
+        _this3.steps.splice(i, 1);
+      }).catch(function (err) {});
     },
     edit: function edit(step) {
       // 删除当前step
       this.remove(step);
       // 在输入框显示当前step的name
-      this.newStep = step, name;
+      this.newStep = step.name;
       // focus 当前输入框
       this.$refs.newStep.focus();
     },
@@ -47895,7 +47899,7 @@ var render = function() {
               _c(
                 "ul",
                 { staticClass: "list-group" },
-                _vm._l(_vm.inProcess, function(step, index) {
+                _vm._l(_vm.inProcess, function(step) {
                   return _c("li", { staticClass: "list-group-item" }, [
                     _c(
                       "span",
@@ -48022,7 +48026,7 @@ var render = function() {
             _c(
               "ul",
               { staticClass: "list-group" },
-              _vm._l(_vm.processed, function(step, index) {
+              _vm._l(_vm.processed, function(step) {
                 return _c("li", { staticClass: "list-group-item" }, [
                   _c(
                     "span",

@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
           <ul class="list-group">
-            <li class="list-group-item" v-for="(step, index) in inProcess">
+            <li class="list-group-item" v-for="step in inProcess">
               <span @dblclick="edit(step)">{{ step.name }}</span>
               <span class="pull-right">
                 <i class="fa fa-check" @click="toggle(step)"></i>
@@ -40,7 +40,7 @@
 
         <div class="card-body">
           <ul class="list-group">
-            <li class="list-group-item" v-for="(step, index) in processed">
+            <li class="list-group-item" v-for="step in processed">
               <span @dblclick="edit(step)">{{ step.name }}</span>
               <span class="pull-right">
                 <i class="fa fa-check" @click="toggle(step)"></i>
@@ -106,14 +106,18 @@
         step.completion = !step.completion
       },
       remove (step) {
-        let i = this.steps.indexOf(step)
-        this.steps.splice(i, 1)
+        axios.delete(`${this.route}/${step.id}`).then((res) => {
+          let i = this.steps.indexOf(step)
+          this.steps.splice(i, 1)
+        }).catch((err) => {
+
+        })
       },
       edit (step) {
         // 删除当前step
         this.remove(step)
         // 在输入框显示当前step的name
-        this.newStep = step, name
+        this.newStep = step.name
         // focus 当前输入框
         this.$refs.newStep.focus()
       },

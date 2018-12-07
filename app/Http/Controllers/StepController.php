@@ -83,8 +83,8 @@ class StepController extends Controller
      * @param  \App\Step  $step
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Step $step)
+    public function destroy(Task $task, Step $step)
     {
-        //
+        $step->delete();
     }
 }
