@@ -57,6 +57,9 @@
 
 <script>
   export default {
+    props: {
+      route: String
+    },
     data () {
       return {
         steps: [
@@ -65,7 +68,7 @@
         newStep: ''
       }
     },
-    created() {
+    created () {
       this.fetchSteps()
     },
     computed: {
@@ -81,9 +84,11 @@
       }
     },
     methods: {
-      fetchSteps() {
-        axios.get(window.location.href + '/steps').then((res) => {
-          this.steps = res.data
+      fetchSteps () {
+        axios.get(this.route + '/123').then((res) => {
+          this.steps = res.data.steps
+        }).catch((err) => {
+
         })
       },
       addStep () {
