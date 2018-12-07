@@ -19,5 +19,6 @@ Route::get('/', 'ProjectsController@index');
 Route::resource('projects', 'ProjectsController');
 Route::resource('tasks', 'TasksController');
 Route::resource('tasks.steps', 'stepController');
+Route::post('tasks/{task}/steps/complete', 'StepController@completeAll');
 Route::post('tasks/{id}/check', 'TasksController@check')->name('tasks.check');
 Route::delete('tasks/{id}/destroy', 'TasksController@destroy')->name('tasks.destroy');

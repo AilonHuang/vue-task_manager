@@ -128,9 +128,14 @@
         })
       },
       completeAll () {
-        this.inProcess.forEach((step) => {
-          step.completion = true
+        axios.post(`${this.route}/complete`).then((res) => {
+          this.inProcess.forEach((step) => {
+            step.completion = true
+          })
+        }).catch((err) => {
+
         })
+
       },
       clearCompleted () {
         this.steps = this.inProcess

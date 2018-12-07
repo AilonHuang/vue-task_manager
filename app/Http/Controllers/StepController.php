@@ -77,6 +77,13 @@ class StepController extends Controller
         $step->update($request->only('completion'));
     }
 
+    public function completeAll(Task $task)
+    {
+        $task->steps()->update([
+            'completion' => true
+        ]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
