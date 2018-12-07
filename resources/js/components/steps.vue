@@ -60,13 +60,13 @@
     data () {
       return {
         steps: [
-          {name: 'hello', completion: false},
-          {name: 'world', completion: false},
-          {name: '1', completion: false},
-          {name: '2', completion: true},
+          // {name: '', completion: false},
         ],
         newStep: ''
       }
+    },
+    created() {
+      this.fetchSteps()
     },
     computed: {
       inProcess () {
@@ -81,6 +81,11 @@
       }
     },
     methods: {
+      fetchSteps() {
+        axios.get(window.location.href + '/steps').then((res) => {
+          this.steps = res.data
+        })
+      },
       addStep () {
         this.steps.push({name: this.newStep, completion: false})
         this.newStep = ''
