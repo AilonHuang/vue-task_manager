@@ -19,17 +19,7 @@
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-header">
-          <div class="form-group">
-            <label v-if="!newStep">要完成当前任务，需要哪些步骤？</label>
-            <input type="text" v-model="newStep" ref="newStep" @keyup.enter="addStep"
-                   class="form-control">
-          </div>
-
-          <button class="btn btn-sm btn-success pull-right" v-if="newStep" @click="addStep">添加步骤</button>
-        </div>
-      </div>
+      <step-input :route="route" @add="sync"></step-input>
     </div>
 
     <div class="col-4">
@@ -56,16 +46,19 @@
 </template>
 
 <script>
+  import stepInput from './step-input'
   export default {
     props: {
       route: String
+    },
+    components: {
+        stepInput
     },
     data () {
       return {
         steps: [
           // {name: '', completion: false},
         ],
-        newStep: ''
       }
     },
     created () {
@@ -91,16 +84,8 @@
 
         })
       },
-      addStep () {
-        axios.post(this.route, {name: this.newStep}).then((res) => {
-          this.steps.push(res.data.step)
-          this.newStep = ''
-
-        }).catch((err) => {
-
-        })
-        // this.steps.push({name: this.newStep, completion: false})
-        // this.newStep = ''
+      sync (step) {
+          this.steps.push(step)
       },
       toggle (step) {
         axios.patch(`${this.route}/${step.id}`, {completion: !step.completion}).then((res) => {
