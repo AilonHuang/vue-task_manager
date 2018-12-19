@@ -46,13 +46,14 @@
 </template>
 
 <script>
-  import stepInput from './step-input'
+  import StepInput from './step-input'
+  import {Hub} from '../event-bus'
   export default {
     props: {
       route: String
     },
     components: {
-        stepInput
+        StepInput
     },
     data () {
       return {
@@ -107,9 +108,7 @@
         // 删除当前step
         this.remove(step, () => {
           // 在输入框显示当前step的name
-          this.newStep = step.name
-          // focus 当前输入框
-          this.$refs.newStep.focus()
+          Hub.$emit('edit', step)
         })
       },
       completeAll () {
