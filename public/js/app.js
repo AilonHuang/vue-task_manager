@@ -47559,7 +47559,7 @@ exports = module.exports = __webpack_require__(44)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47947,7 +47947,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    route: String
+    route: String,
+    initialSteps: Array
   },
   components: {
     StepInput: __WEBPACK_IMPORTED_MODULE_0__step_input___default.a,
@@ -47955,13 +47956,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   data: function data() {
     return {
-      steps: [
-        // {name: '', completion: false},
-      ]
+      steps: this.initialSteps
     };
   },
   created: function created() {
-    this.fetchSteps();
     __WEBPACK_IMPORTED_MODULE_2__event_bus__["a" /* Hub */].$on('remove', this.remove);
   },
 
@@ -47978,13 +47976,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
-    fetchSteps: function fetchSteps() {
-      var _this = this;
-
-      axios.get(this.route).then(function (res) {
-        _this.steps = res.data.steps;
-      }).catch(function (err) {});
-    },
     sync: function sync(step) {
       this.steps.push(step);
     },
@@ -47993,19 +47984,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.steps.splice(i, 1);
     },
     completeAll: function completeAll() {
-      var _this2 = this;
+      var _this = this;
 
       axios.post(this.route + '/complete').then(function (res) {
-        _this2.inProcess.forEach(function (step) {
+        _this.inProcess.forEach(function (step) {
           step.completion = true;
         });
       }).catch(function (err) {});
     },
     clearCompleted: function clearCompleted() {
-      var _this3 = this;
+      var _this2 = this;
 
       axios.delete(this.route + '/clear').then(function (res) {
-        _this3.steps = _this3.inProcess;
+        _this2.steps = _this2.inProcess;
       }).catch(function (err) {});
     }
   }

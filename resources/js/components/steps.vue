@@ -27,7 +27,8 @@
 
   export default {
     props: {
-      route: String
+      route: String,
+      initialSteps: Array,
     },
     components: {
       StepInput,
@@ -35,13 +36,10 @@
     },
     data() {
       return {
-        steps: [
-          // {name: '', completion: false},
-        ],
+        steps: this.initialSteps,
       }
     },
     created() {
-      this.fetchSteps()
       Hub.$on('remove', this.remove)
     },
     computed: {
@@ -57,13 +55,6 @@
       }
     },
     methods: {
-      fetchSteps() {
-        axios.get(this.route).then((res) => {
-          this.steps = res.data.steps
-        }).catch((err) => {
-
-        })
-      },
       sync(step) {
         this.steps.push(step)
       },
