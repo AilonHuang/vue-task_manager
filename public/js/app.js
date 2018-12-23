@@ -47559,7 +47559,7 @@ exports = module.exports = __webpack_require__(44)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47934,6 +47934,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -48249,9 +48255,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -48293,50 +48296,57 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.steps.length
-    ? _c("div", { staticClass: "card mb-4" }, [
-        _c("div", { staticClass: "card-body" }, [
-          _c(
-            "ul",
-            { staticClass: "list-group" },
-            _vm._l(_vm.steps, function(step) {
-              return _c("li", { staticClass: "list-group-item" }, [
-                _c(
-                  "span",
-                  {
-                    on: {
-                      dblclick: function($event) {
-                        _vm.edit(step)
+    ? _c(
+        "div",
+        { staticClass: "card mb-4" },
+        [
+          _vm._t("default"),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _c(
+              "ul",
+              { staticClass: "list-group" },
+              _vm._l(_vm.steps, function(step) {
+                return _c("li", { staticClass: "list-group-item" }, [
+                  _c(
+                    "span",
+                    {
+                      on: {
+                        dblclick: function($event) {
+                          _vm.edit(step)
+                        }
                       }
-                    }
-                  },
-                  [_vm._v(_vm._s(step.name))]
-                ),
-                _vm._v(" "),
-                _c("span", { staticClass: "pull-right" }, [
-                  _c("i", {
-                    staticClass: "fa fa-check",
-                    on: {
-                      click: function($event) {
-                        _vm.toggle(step)
-                      }
-                    }
-                  }),
+                    },
+                    [_vm._v(_vm._s(step.name))]
+                  ),
                   _vm._v(" "),
-                  _c("i", {
-                    staticClass: "fa fa-close",
-                    on: {
-                      click: function($event) {
-                        _vm.remove(step)
+                  _c("span", { staticClass: "pull-right" }, [
+                    _c("i", {
+                      staticClass: "fa fa-check",
+                      on: {
+                        click: function($event) {
+                          _vm.toggle(step)
+                        }
                       }
-                    }
-                  })
+                    }),
+                    _vm._v(" "),
+                    _c("i", {
+                      staticClass: "fa fa-close",
+                      on: {
+                        click: function($event) {
+                          _vm.remove(step)
+                        }
+                      }
+                    })
+                  ])
                 ])
-              ])
-            }),
-            0
-          )
-        ])
-      ])
+              }),
+              0
+            )
+          ])
+        ],
+        2
+      )
     : _vm._e()
 }
 var staticRenderFns = []
@@ -48362,7 +48372,23 @@ var render = function() {
       "div",
       { staticClass: "col-4 mr-3" },
       [
-        _c("step-list", { attrs: { route: _vm.route, steps: _vm.inProcess } }),
+        _c("step-list", { attrs: { route: _vm.route, steps: _vm.inProcess } }, [
+          _c("div", { staticClass: "card-header" }, [
+            _vm._v(
+              "\n        待完成的步骤（" +
+                _vm._s(_vm.inProcess.length) +
+                "）:\n        "
+            ),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-sm btn-success pull-right",
+                on: { click: _vm.completeAll }
+              },
+              [_vm._v("完成所有")]
+            )
+          ])
+        ]),
         _vm._v(" "),
         _c("step-input", { attrs: { route: _vm.route }, on: { add: _vm.sync } })
       ],
@@ -48372,7 +48398,23 @@ var render = function() {
     _c(
       "div",
       { staticClass: "col-4" },
-      [_c("step-list", { attrs: { route: _vm.route, steps: _vm.processed } })],
+      [
+        _c("step-list", { attrs: { route: _vm.route, steps: _vm.processed } }, [
+          _c("div", { staticClass: "card-header" }, [
+            _vm._v(
+              "已完成步骤（" + _vm._s(_vm.processed.length) + "）:\n        "
+            ),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-sm btn-danger pull-right",
+                on: { click: _vm.clearCompleted }
+              },
+              [_vm._v("清除已完成")]
+            )
+          ])
+        ])
+      ],
       1
     )
   ])

@@ -1,15 +1,21 @@
 <template>
   <div class="row justify-content-center">
     <div class="col-4 mr-3">
-      <step-list :route="route" :steps="inProcess"></step-list>
+      <step-list :route="route" :steps="inProcess">
+        <div class="card-header">
+          待完成的步骤（{{ inProcess.length }}）:
+          <button class="btn btn-sm btn-success pull-right" @click="completeAll">完成所有</button>
+        </div>
+      </step-list>
       <step-input :route="route" @add="sync"></step-input>
     </div>
 
     <div class="col-4">
-      <!--<div class="card-header">已完成步骤（{{ processed.length }}）:-->
-      <!--<button class="btn btn-sm btn-danger pull-right" @click="clearCompleted">清除已完成</button>-->
-      <!--</div>-->
-      <step-list :route="route" :steps="processed"></step-list>
+      <step-list :route="route" :steps="processed">
+        <div class="card-header">已完成步骤（{{ processed.length }}）:
+          <button class="btn btn-sm btn-danger pull-right" @click="clearCompleted">清除已完成</button>
+        </div>
+      </step-list>
     </div>
   </div>
 </template>
