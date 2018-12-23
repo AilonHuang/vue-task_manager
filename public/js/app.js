@@ -47559,7 +47559,7 @@ exports = module.exports = __webpack_require__(44)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47976,9 +47976,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
-    sync: function sync(step) {
-      this.steps.push(step);
-    },
     remove: function remove(step) {
       var i = this.steps.indexOf(step);
       this.steps.splice(i, 1);
@@ -48088,11 +48085,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     addStep: function addStep() {
-      var _this = this;
-
       axios.post(this.route, { name: this.newStep }).then(function (res) {
-        _this.$emit('add', res.data.step);
-        _this.newStep = '';
+        window.location.reload();
       }).catch(function (err) {});
     },
     edit: function edit(step) {
@@ -48381,7 +48375,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("step-input", { attrs: { route: _vm.route }, on: { add: _vm.sync } })
+        _c("step-input", { attrs: { route: _vm.route } })
       ],
       1
     ),

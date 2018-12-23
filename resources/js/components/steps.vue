@@ -7,7 +7,7 @@
           <button class="btn btn-sm btn-success pull-right" @click="completeAll">完成所有</button>
         </div>
       </step-list>
-      <step-input :route="route" @add="sync"></step-input>
+      <step-input :route="route"></step-input>
     </div>
 
     <div class="col-4">
@@ -55,9 +55,6 @@
       }
     },
     methods: {
-      sync(step) {
-        this.steps.push(step)
-      },
       remove(step) {
         let i = this.steps.indexOf(step)
         this.steps.splice(i, 1)
