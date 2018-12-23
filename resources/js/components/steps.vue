@@ -6,25 +6,11 @@
     </div>
 
     <div class="col-4">
-      <div class="card" v-show="processed.length">
-        <div class="card-header">已完成步骤（{{ processed.length }}）:
-          <button class="btn btn-sm btn-danger pull-right" @click="clearCompleted">清除已完成</button>
-        </div>
-
-        <div class="card-body">
-          <ul class="list-group">
-            <li class="list-group-item" v-for="step in processed">
-              <span @dblclick="edit(step)">{{ step.name }}</span>
-              <span class="pull-right">
-                <i class="fa fa-check" @click="toggle(step)"></i>
-                <i class="fa fa-close" @click="remove(step)"></i>
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <!--<div class="card-header">已完成步骤（{{ processed.length }}）:-->
+      <!--<button class="btn btn-sm btn-danger pull-right" @click="clearCompleted">清除已完成</button>-->
+      <!--</div>-->
+      <step-list :route="route" :steps="processed"></step-list>
     </div>
-
   </div>
 </template>
 
@@ -50,6 +36,7 @@
     },
     created() {
       this.fetchSteps()
+      Hub.$on('remove', this.remove)
     },
     computed: {
       inProcess() {
@@ -74,21 +61,9 @@
       sync(step) {
         this.steps.push(step)
       },
-      remove(step, success) {
-        axios.delete(`${this.route}/${step.id}`).then((res) => {
-          let i = this.steps.indexOf(step)
-          this.steps.splice(i, 1)
-          success && success()
-        }).catch((err) => {
-
-        })
-      },
-      edit(step) {
-        // 删除当前step
-        this.remove(step, () => {
-          // 在输入框显示当前step的name
-          Hub.$emit('edit', step)
-        })
+      remove(step) {
+        let i = this.steps.indexOf(step)
+        this.steps.splice(i, 1)
       },
       completeAll() {
         axios.post(`${this.route}/complete`).then((res) => {

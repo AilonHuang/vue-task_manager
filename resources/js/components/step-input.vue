@@ -37,6 +37,7 @@
         })
       },
       edit(step) {
+        console.log('edit')
         this.newStep = step.name
         // focus 当前输入框
         this.$refs.newStep.focus()

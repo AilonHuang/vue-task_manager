@@ -70,7 +70,7 @@
 "use strict";
 
 
-var bind = __webpack_require__(6);
+var bind = __webpack_require__(7);
 var isBuffer = __webpack_require__(22);
 
 /*global toString:true*/
@@ -424,10 +424,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(8);
+    adapter = __webpack_require__(9);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(8);
+    adapter = __webpack_require__(9);
   }
   return adapter;
 }
@@ -502,7 +502,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
 /* 3 */
@@ -615,6 +615,17 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Hub; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+
+var Hub = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
+
+/***/ }),
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3195,7 +3206,7 @@ Popper.Defaults = Defaults;
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -13566,7 +13577,7 @@ return jQuery;
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13584,7 +13595,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -13774,7 +13785,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13785,7 +13796,7 @@ var settle = __webpack_require__(25);
 var buildURL = __webpack_require__(27);
 var parseHeaders = __webpack_require__(28);
 var isURLSameOrigin = __webpack_require__(29);
-var createError = __webpack_require__(9);
+var createError = __webpack_require__(10);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(30);
 
 module.exports = function xhrAdapter(config) {
@@ -13961,7 +13972,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13986,7 +13997,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13998,7 +14009,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14024,7 +14035,7 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25121,17 +25132,6 @@ module.exports = Vue;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(39).setImmediate))
 
 /***/ }),
-/* 13 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Hub; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-
-var Hub = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
-
-/***/ }),
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -25156,7 +25156,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __webpack_require__(16);
 
-window.Vue = __webpack_require__(12);
+window.Vue = __webpack_require__(13);
 
 
 
@@ -25182,8 +25182,8 @@ window._ = __webpack_require__(17);
  */
 
 try {
-  window.Popper = __webpack_require__(4).default;
-  window.$ = window.jQuery = __webpack_require__(5);
+  window.Popper = __webpack_require__(5).default;
+  window.$ = window.jQuery = __webpack_require__(6);
 
   __webpack_require__(19);
 } catch (e) {}
@@ -42382,7 +42382,7 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(5), __webpack_require__(4)) :
+   true ? factory(exports, __webpack_require__(6), __webpack_require__(5)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -46336,7 +46336,7 @@ module.exports = __webpack_require__(21);
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(6);
+var bind = __webpack_require__(7);
 var Axios = __webpack_require__(23);
 var defaults = __webpack_require__(2);
 
@@ -46371,9 +46371,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(11);
+axios.Cancel = __webpack_require__(12);
 axios.CancelToken = __webpack_require__(37);
-axios.isCancel = __webpack_require__(10);
+axios.isCancel = __webpack_require__(11);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -46526,7 +46526,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(9);
+var createError = __webpack_require__(10);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -46959,7 +46959,7 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(34);
-var isCancel = __webpack_require__(10);
+var isCancel = __webpack_require__(11);
 var defaults = __webpack_require__(2);
 var isAbsoluteURL = __webpack_require__(35);
 var combineURLs = __webpack_require__(36);
@@ -47119,7 +47119,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(11);
+var Cancel = __webpack_require__(12);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -47471,7 +47471,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(8)))
 
 /***/ }),
 /* 41 */
@@ -47559,7 +47559,7 @@ exports = module.exports = __webpack_require__(44)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47917,21 +47917,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__step_input___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__step_input__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__step_list__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__step_list___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__step_list__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__event_bus__ = __webpack_require__(13);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__event_bus__ = __webpack_require__(4);
 //
 //
 //
@@ -47970,6 +47956,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   created: function created() {
     this.fetchSteps();
+    __WEBPACK_IMPORTED_MODULE_2__event_bus__["a" /* Hub */].$on('remove', this.remove);
   },
 
   computed: {
@@ -47995,36 +47982,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     sync: function sync(step) {
       this.steps.push(step);
     },
-    remove: function remove(step, success) {
-      var _this2 = this;
-
-      axios.delete(this.route + '/' + step.id).then(function (res) {
-        var i = _this2.steps.indexOf(step);
-        _this2.steps.splice(i, 1);
-        success && success();
-      }).catch(function (err) {});
-    },
-    edit: function edit(step) {
-      // 删除当前step
-      this.remove(step, function () {
-        // 在输入框显示当前step的name
-        __WEBPACK_IMPORTED_MODULE_2__event_bus__["a" /* Hub */].$emit('edit', step);
-      });
+    remove: function remove(step) {
+      var i = this.steps.indexOf(step);
+      this.steps.splice(i, 1);
     },
     completeAll: function completeAll() {
-      var _this3 = this;
+      var _this2 = this;
 
       axios.post(this.route + '/complete').then(function (res) {
-        _this3.inProcess.forEach(function (step) {
+        _this2.inProcess.forEach(function (step) {
           step.completion = true;
         });
       }).catch(function (err) {});
     },
     clearCompleted: function clearCompleted() {
-      var _this4 = this;
+      var _this3 = this;
 
       axios.delete(this.route + '/clear').then(function (res) {
-        _this4.steps = _this4.inProcess;
+        _this3.steps = _this3.inProcess;
       }).catch(function (err) {});
     }
   }
@@ -48083,7 +48058,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus__ = __webpack_require__(4);
 //
 //
 //
@@ -48124,6 +48099,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).catch(function (err) {});
     },
     edit: function edit(step) {
+      console.log('edit');
       this.newStep = step.name;
       // focus 当前输入框
       this.$refs.newStep.focus();
@@ -48255,6 +48231,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus__ = __webpack_require__(4);
 //
 //
 //
@@ -48276,6 +48253,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     steps: Array,
@@ -48284,9 +48263,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     toggle: function toggle(step) {
       console.log(step);
-      axios.patch(this.route + "/" + step.id, { completion: !step.completion }).then(function (res) {
+      axios.patch(this.route + '/' + step.id, { completion: !step.completion }).then(function (res) {
         step.completion = !step.completion;
       }).catch(function (err) {});
+    },
+    remove: function remove(step, success) {
+      axios.delete(this.route + '/' + step.id).then(function (res) {
+        __WEBPACK_IMPORTED_MODULE_0__event_bus__["a" /* Hub */].$emit('remove', step);
+        success && success();
+      });
+    },
+    edit: function edit(step) {
+      // 删除当前step
+      this.remove(step, function () {
+        console.log('step');
+        // 在输入框显示当前step的name
+        __WEBPACK_IMPORTED_MODULE_0__event_bus__["a" /* Hub */].$emit('edit', step);
+      });
     }
   }
 });
@@ -48301,20 +48294,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.steps.length
     ? _c("div", { staticClass: "card mb-4" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _vm._v(
-            "\n    待完成的步骤（" + _vm._s(_vm.steps.length) + "）:\n    "
-          ),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-sm btn-success pull-right",
-              on: { click: _vm.completeAll }
-            },
-            [_vm._v("完成所有")]
-          )
-        ]),
-        _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c(
             "ul",
@@ -48390,80 +48369,12 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "col-4" }, [
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.processed.length,
-              expression: "processed.length"
-            }
-          ],
-          staticClass: "card"
-        },
-        [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v(
-              "已完成步骤（" + _vm._s(_vm.processed.length) + "）:\n        "
-            ),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-sm btn-danger pull-right",
-                on: { click: _vm.clearCompleted }
-              },
-              [_vm._v("清除已完成")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c(
-              "ul",
-              { staticClass: "list-group" },
-              _vm._l(_vm.processed, function(step) {
-                return _c("li", { staticClass: "list-group-item" }, [
-                  _c(
-                    "span",
-                    {
-                      on: {
-                        dblclick: function($event) {
-                          _vm.edit(step)
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(step.name))]
-                  ),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "pull-right" }, [
-                    _c("i", {
-                      staticClass: "fa fa-check",
-                      on: {
-                        click: function($event) {
-                          _vm.toggle(step)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("i", {
-                      staticClass: "fa fa-close",
-                      on: {
-                        click: function($event) {
-                          _vm.remove(step)
-                        }
-                      }
-                    })
-                  ])
-                ])
-              }),
-              0
-            )
-          ])
-        ]
-      )
-    ])
+    _c(
+      "div",
+      { staticClass: "col-4" },
+      [_c("step-list", { attrs: { route: _vm.route, steps: _vm.processed } })],
+      1
+    )
   ])
 }
 var staticRenderFns = []
