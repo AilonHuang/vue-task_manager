@@ -47559,7 +47559,7 @@ exports = module.exports = __webpack_require__(44)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47917,7 +47917,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__step_input___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__step_input__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__step_list__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__step_list___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__step_list__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__event_bus__ = __webpack_require__(4);
 //
 //
 //
@@ -47940,7 +47939,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
 
 
 
@@ -47948,7 +47946,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     route: String,
-    initialSteps: Array
+    initialSteps: Array,
+    todos: Array,
+    dones: Array
   },
   components: {
     StepInput: __WEBPACK_IMPORTED_MODULE_0__step_input___default.a,
@@ -47959,41 +47959,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       steps: this.initialSteps
     };
   },
-  created: function created() {
-    __WEBPACK_IMPORTED_MODULE_2__event_bus__["a" /* Hub */].$on('remove', this.remove);
-  },
 
-  computed: {
-    inProcess: function inProcess() {
-      return this.steps.filter(function (step) {
-        return !step.completion;
-      });
-    },
-    processed: function processed() {
-      return this.steps.filter(function (step) {
-        return step.completion;
-      });
-    }
-  },
   methods: {
     remove: function remove(step) {
       var i = this.steps.indexOf(step);
       this.steps.splice(i, 1);
     },
     completeAll: function completeAll() {
-      var _this = this;
-
       axios.post(this.route + '/complete').then(function (res) {
-        _this.inProcess.forEach(function (step) {
-          step.completion = true;
-        });
+        window.location.reload();
       }).catch(function (err) {});
     },
     clearCompleted: function clearCompleted() {
-      var _this2 = this;
-
       axios.delete(this.route + '/clear').then(function (res) {
-        _this2.steps = _this2.inProcess;
+        window.location.reload();
       }).catch(function (err) {});
     }
   }
@@ -48250,24 +48229,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     toggle: function toggle(step) {
-      console.log(step);
       axios.patch(this.route + '/' + step.id, { completion: !step.completion }).then(function (res) {
-        step.completion = !step.completion;
+        window.location.reload();
       }).catch(function (err) {});
     },
     remove: function remove(step, success) {
       axios.delete(this.route + '/' + step.id).then(function (res) {
-        __WEBPACK_IMPORTED_MODULE_0__event_bus__["a" /* Hub */].$emit('remove', step);
-        success && success();
+        window.location.reload();
       });
     },
     edit: function edit(step) {
       // 删除当前step
-      this.remove(step, function () {
-        console.log('step');
-        // 在输入框显示当前step的name
-        __WEBPACK_IMPORTED_MODULE_0__event_bus__["a" /* Hub */].$emit('edit', step);
-      });
+      this.remove(step);
+      // 在输入框显示当前step的name
+      __WEBPACK_IMPORTED_MODULE_0__event_bus__["a" /* Hub */].$emit('edit', step);
     }
   }
 });
@@ -48357,11 +48332,11 @@ var render = function() {
       "div",
       { staticClass: "col-4 mr-3" },
       [
-        _c("step-list", { attrs: { route: _vm.route, steps: _vm.inProcess } }, [
+        _c("step-list", { attrs: { route: _vm.route, steps: _vm.todos } }, [
           _c("div", { staticClass: "card-header" }, [
             _vm._v(
               "\n        待完成的步骤（" +
-                _vm._s(_vm.inProcess.length) +
+                _vm._s(_vm.todos.length) +
                 "）:\n        "
             ),
             _c(
@@ -48384,11 +48359,9 @@ var render = function() {
       "div",
       { staticClass: "col-4" },
       [
-        _c("step-list", { attrs: { route: _vm.route, steps: _vm.processed } }, [
+        _c("step-list", { attrs: { route: _vm.route, steps: _vm.dones } }, [
           _c("div", { staticClass: "card-header" }, [
-            _vm._v(
-              "已完成步骤（" + _vm._s(_vm.processed.length) + "）:\n        "
-            ),
+            _vm._v("已完成步骤（" + _vm._s(_vm.dones.length) + "）:\n        "),
             _c(
               "button",
               {

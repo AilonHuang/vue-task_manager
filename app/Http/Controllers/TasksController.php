@@ -62,7 +62,9 @@ class TasksController extends Controller
     public function show(Task $task)
     {
         $steps = $task->steps;
-        return view('tasks.show', compact('task', 'steps'));
+        $todos = $steps->where('completion', 0)->values();
+        $dones = $steps->where('completion', 1)->values();
+        return view('tasks.show', compact('task', 'steps', 'todos', 'dones'));
     }
 
     public function check($id)
