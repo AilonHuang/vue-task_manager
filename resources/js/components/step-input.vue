@@ -13,8 +13,6 @@
 </template>
 
 <script>
-  import {Hub} from '../event-bus'
-
   export default {
     props: {
       route: String
@@ -24,9 +22,6 @@
         newStep: ''
       }
     },
-    created() {
-      Hub.$on('edit', this.edit)
-    },
     methods: {
       addStep() {
         axios.post(this.route, {name: this.newStep}).then((res) => {
@@ -35,12 +30,6 @@
 
         })
       },
-      edit(step) {
-        console.log('edit')
-        this.newStep = step.name
-        // focus 当前输入框
-        this.$refs.newStep.focus()
-      }
     }
   }
 </script>

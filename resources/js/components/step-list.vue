@@ -3,8 +3,9 @@
     <slot></slot>
     <div class="card-body">
       <ul class="list-group">
-        <li class="list-group-item" v-for="step in steps">
-          <span @dblclick="edit(step)">{{ step.name }}</span>
+        <li class="list-group-item" v-for="(step, i) in steps">
+          <span @dblclick="edit(step, i)" ref="stepName">{{ step.name }}</span>
+          <input type="text" v-model="editedStep" @keyup.enter="update(step)" ref="stepInput" style="display: none;" class="form-control">
           <span class="pull-right">
             <i class="fa fa-check" @click="toggle(step)"></i>
             <i class="fa fa-close" @click="remove(step)"></i>
@@ -16,16 +17,19 @@
 </template>
 
 <script>
-  import {Hub} from '../event-bus'
-
   export default {
     props: {
       steps: Array,
       route: String,
     },
+    data() {
+      return {
+        editedStep: ''
+      }
+    },
     methods: {
       toggle(step) {
-        axios.patch(`${this.route}/${step.id}`, {completion: !step.completion}).then((res) => {
+        axios.patch(`${this.route}/${step.id}/toggle`, {completion: !step.completion}).then((res) => {
           window.location.reload()
         }).catch((err) => {
 
@@ -36,12 +40,18 @@
           window.location.reload()
         })
       },
-      edit(step) {
-        // 删除当前step
-        this.remove(step)
-        // 在输入框显示当前step的name
-        Hub.$emit('edit', step)
+      edit(step, i) {
+        this.$refs.stepName[i].style.display = 'none'
+        this.$refs.stepInput[i].style.display = 'block'
+        this.editedStep = step.name
       },
+      update(step) {
+        axios.patch(`${this.route}/${step.id}`, {name: this.editedStep}).then((res) => {
+          window.location.reload()
+        }).catch((err) => {
+
+        })
+      }
     }
   }
 </script>

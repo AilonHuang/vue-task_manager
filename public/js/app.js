@@ -614,17 +614,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Hub; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-
-var Hub = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
-
-/***/ }),
+/* 4 */,
 /* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -47559,7 +47549,7 @@ exports = module.exports = __webpack_require__(44)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -47946,7 +47936,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     route: String,
-    initialSteps: Array,
     todos: Array,
     dones: Array
   },
@@ -47954,12 +47943,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     StepInput: __WEBPACK_IMPORTED_MODULE_0__step_input___default.a,
     StepList: __WEBPACK_IMPORTED_MODULE_1__step_list___default.a
   },
-  data: function data() {
-    return {
-      steps: this.initialSteps
-    };
-  },
-
   methods: {
     remove: function remove(step) {
       var i = this.steps.indexOf(step);
@@ -48031,7 +48014,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus__ = __webpack_require__(4);
 //
 //
 //
@@ -48046,8 +48028,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -48058,21 +48038,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       newStep: ''
     };
   },
-  created: function created() {
-    __WEBPACK_IMPORTED_MODULE_0__event_bus__["a" /* Hub */].$on('edit', this.edit);
-  },
 
   methods: {
     addStep: function addStep() {
       axios.post(this.route, { name: this.newStep }).then(function (res) {
         window.location.reload();
       }).catch(function (err) {});
-    },
-    edit: function edit(step) {
-      console.log('edit');
-      this.newStep = step.name;
-      // focus 当前输入框
-      this.$refs.newStep.focus();
     }
   }
 });
@@ -48201,7 +48172,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__event_bus__ = __webpack_require__(4);
 //
 //
 //
@@ -48219,17 +48189,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
-
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     steps: Array,
     route: String
   },
+  data: function data() {
+    return {
+      editedStep: ''
+    };
+  },
+
   methods: {
     toggle: function toggle(step) {
-      axios.patch(this.route + '/' + step.id, { completion: !step.completion }).then(function (res) {
+      axios.patch(this.route + '/' + step.id + '/toggle', { completion: !step.completion }).then(function (res) {
         window.location.reload();
       }).catch(function (err) {});
     },
@@ -48238,11 +48213,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         window.location.reload();
       });
     },
-    edit: function edit(step) {
-      // 删除当前step
-      this.remove(step);
-      // 在输入框显示当前step的name
-      __WEBPACK_IMPORTED_MODULE_0__event_bus__["a" /* Hub */].$emit('edit', step);
+    edit: function edit(step, i) {
+      this.$refs.stepName[i].style.display = 'none';
+      this.$refs.stepInput[i].style.display = 'block';
+      this.editedStep = step.name;
+    },
+    update: function update(step) {
+      axios.patch(this.route + '/' + step.id, { name: this.editedStep }).then(function (res) {
+        window.location.reload();
+      }).catch(function (err) {});
     }
   }
 });
@@ -48266,19 +48245,61 @@ var render = function() {
             _c(
               "ul",
               { staticClass: "list-group" },
-              _vm._l(_vm.steps, function(step) {
+              _vm._l(_vm.steps, function(step, i) {
                 return _c("li", { staticClass: "list-group-item" }, [
                   _c(
                     "span",
                     {
+                      ref: "stepName",
+                      refInFor: true,
                       on: {
                         dblclick: function($event) {
-                          _vm.edit(step)
+                          _vm.edit(step, i)
                         }
                       }
                     },
                     [_vm._v(_vm._s(step.name))]
                   ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.editedStep,
+                        expression: "editedStep"
+                      }
+                    ],
+                    ref: "stepInput",
+                    refInFor: true,
+                    staticClass: "form-control",
+                    staticStyle: { display: "none" },
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.editedStep },
+                    on: {
+                      keyup: function($event) {
+                        if (
+                          !("button" in $event) &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        _vm.update(step)
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.editedStep = $event.target.value
+                      }
+                    }
+                  }),
                   _vm._v(" "),
                   _c("span", { staticClass: "pull-right" }, [
                     _c("i", {

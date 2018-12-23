@@ -27,18 +27,12 @@
   export default {
     props: {
       route: String,
-      initialSteps: Array,
       todos: Array,
       dones: Array,
     },
     components: {
       StepInput,
       StepList
-    },
-    data() {
-      return {
-        steps: this.initialSteps,
-      }
     },
     methods: {
       remove(step) {

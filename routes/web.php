@@ -19,6 +19,7 @@ Route::get('/', 'ProjectsController@index');
 Route::resource('projects', 'ProjectsController');
 Route::delete('tasks/{task}/steps/clear', 'StepController@clear');
 Route::post('tasks/{task}/steps/complete', 'StepController@completeAll');
+Route::patch('tasks/{task}/steps/{step}/toggle', 'StepController@toggle');
 Route::resource('tasks', 'TasksController');
 Route::resource('tasks.steps', 'stepController');
 Route::post('tasks/{id}/check', 'TasksController@check')->name('tasks.check');

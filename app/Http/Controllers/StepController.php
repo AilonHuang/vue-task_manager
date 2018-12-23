@@ -72,6 +72,11 @@ class StepController extends Controller
      */
     public function update(Request $request, Task $task, Step $step)
     {
+        $step->update($request->only('name'));
+    }
+
+    public function toggle(Request $request, Task $task, Step $step)
+    {
         $step->update($request->only('completion'));
     }
 
