@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\createStep;
 use App\Step;
 use App\Task;
 use Illuminate\Http\Request;
@@ -15,9 +16,10 @@ class StepController extends Controller
      */
     public function index(Task $task)
     {
-        return response()->json([
-            'steps' => $task->steps,
-        ], 200);
+        $steps = $task->steps;
+        $todos = $steps->where('completion', 0)->values();
+        $dones = $steps->where('completion', 1)->values();
+        return view('steps.show', compact('task', 'todos', 'dones'));
     }
 
     /**
@@ -36,7 +38,7 @@ class StepController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Task $task, Request $request)
+    public function store(Task $task, createStep $request)
     {
         $task->steps()->create($request->only('name'));
     }
