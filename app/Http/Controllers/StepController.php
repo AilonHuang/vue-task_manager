@@ -41,6 +41,7 @@ class StepController extends Controller
     public function store(Task $task, createStep $request)
     {
         $task->steps()->create($request->only('name'));
+        return back();
     }
 
     /**

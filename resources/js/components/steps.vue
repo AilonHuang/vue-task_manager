@@ -7,7 +7,7 @@
           <button class="btn btn-sm btn-success pull-right" @click="completeAll">完成所有</button>
         </div>
       </step-list>
-      <step-input :route="route"></step-input>
+      <step-input :route="route" :errors="errors"></step-input>
     </div>
 
     <div class="col-4">
@@ -29,6 +29,7 @@
       route: String,
       todos: Array,
       dones: Array,
+      errors: String,
     },
     components: {
       StepInput,

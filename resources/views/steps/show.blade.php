@@ -5,6 +5,7 @@
         <steps route="{{route('tasks.steps.index', $task->id)}}"
                :todos="{{ $todos }}"
                :dones="{{ $dones }}"
+               :errors="{{ json_encode($errors->first('name')) }}"
         ></steps>
     </div>
 @endsection

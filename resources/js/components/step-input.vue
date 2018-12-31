@@ -1,40 +1,30 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <div class="form-group">
-        <label v-if="!newStep">要完成当前任务，需要哪些步骤？</label>
-        <input type="text" v-model="newStep" ref="newStep" @keyup.enter="addStep"
-               class="form-control">
-      </div>
-
-      <button class="btn btn-sm btn-success pull-right" v-if="newStep" @click="addStep">添加步骤</button>
+      <form :action="route" method="POST">
+        <input type="hidden" name="_token" :value="token">
+        <div class="form-group">
+          <label v-if="!newStep">要完成当前任务，需要哪些步骤？</label>
+          <input name="name" type="text" v-model="newStep" class="form-control">
+          <span class="text-danger">{{errors}}</span>
+        </div>
+        <button class="btn btn-sm btn-success pull-right" v-if="newStep" type="submit">添加步骤</button>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
-  import { Message } from 'element-ui'
-  import 'element-ui/lib/theme-chalk/index.css'
-
   export default {
     props: {
-      route: String
+      route: String,
+      errors: String,
     },
     data () {
       return {
-        newStep: ''
+        newStep: '',
+        token: document.head.querySelector('meta[name="csrf-token"]').content
       }
     },
-    methods: {
-      addStep () {
-        axios.post(this.route, {name: this.newStep}).then((res) => {
-          window.location.reload()
-        }).catch((err) => {
-          if (err.response.status === 422) {
-            Message.error(err.response.data.errors.name[0])
-          }
-        })
-      },
-    }
   }
 </script>
